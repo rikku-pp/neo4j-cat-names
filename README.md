@@ -16,7 +16,7 @@ Set up database via Neo4j Sandbox, or by downloading Neo4J community edition.
 
 1. Download and install Neo4j https://neo4j.com/download/
    -Recommended version: Community Server 4.2.X
-   ~~- Download and install APOC plugin: https://neo4j.com/labs/apoc/4.0/installation/ and add `apoc.create.uuid.enabled=true` to neo4j.conf~~
+   -Download and install APOC plugin: https://neo4j.com/labs/apoc/4.0/installation/
 2. Run `neo4j install-service` then `neo4j start` from console
 3. Update codesandbox secret keys with address and password for database.
    - get [ngrok](https://ngrok.com) and run `ngrok tcp 7687`.
