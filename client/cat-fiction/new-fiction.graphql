@@ -1,0 +1,5 @@
+mutation NewFiction ($title: String!, $catName: String!) {
+  NewFiction(title: $title, catName: $catName) {
+    id
+  }
+}

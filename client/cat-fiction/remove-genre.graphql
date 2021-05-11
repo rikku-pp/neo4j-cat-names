@@ -1,0 +1,3 @@
+mutation RemoveGenre ($name: String!) {
+  RemoveGenre (name: $name)
+}

@@ -1,0 +1,6 @@
+mutation UpdateFiction ($id: ID!, $title: String!, $media: Media!) {
+  UpdateFiction(id: $id, title: $title, media: $media) {
+    title
+    media
+  }
+}

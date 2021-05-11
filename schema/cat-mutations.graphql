@@ -1,0 +1,40 @@
+input CSVInput {
+  Country_Name: String!
+  Country_Name_Domestic: String
+  Name: String!
+  Transcription: String
+}
+
+
+mutation ImportCatNames (
+  $listOfCatNames: [CSVInput!]!
+){
+  BatchMergeCats(listOfCatNames: $listOfCatNames) {
+    name
+    catNameCount
+  }
+}
+
+
+type Mutation {
+  BatchMergeCats(listOfCatNames: [CSVInput!]!): [Country!]! @cypher(statement: """
+    UNWIND $listOfCatNames AS CSVInput
+    MERGE (cn: CatName {
+      name: CSVInput.Name
+    }) SET cn.transcribedName = CSVInput.Transcription
+    WITH cn, CSVInput
+    MERGE (co: Country {
+      name: CSVInput.Country_Name
+    }) SET co.localizedName = CSVInput.Country_Name_Domestic
+    WITH cn, co
+    MERGE (cn)-[:NAMED_IN]->(co)
+    RETURN DISTINCT { name: co.name, catNameCount: count(cn) }
+  """)
+  CleanFiction : Int! @cypher(
+    statement: """
+      MATCH (f:Fiction) WHERE f.title = ''
+      DETACH DELETE f
+      RETURN count(*)
+    """
+  )
+}

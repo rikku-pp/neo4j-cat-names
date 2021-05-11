@@ -1,0 +1,5 @@
+mutation RemoveFiction ($id: ID!) {
+  DeleteFiction (id: $id) {
+    title
+  }
+}

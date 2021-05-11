@@ -1,0 +1,9 @@
+query GetFiction ($id: ID!) {
+  GetFiction(id: $id) {
+    title
+    media
+    genre {
+      name
+    }
+  }
+}

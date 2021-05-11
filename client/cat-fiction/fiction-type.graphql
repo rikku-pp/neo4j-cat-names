@@ -1,0 +1,32 @@
+extend type Mutation {
+  NewFiction (title: String!, catName: String!): Fiction! @cypher(
+    statement: """
+      CALL apoc.create.uuids(1) YIELD uuid 
+      MATCH (c:CatName {name: $catName})
+      MERGE (f:Fiction {id: uuid})<-[:APPEARS_IN]-(c)
+      SET f.title = $title
+      RETURN f
+    """
+  )
+  UpdateFictionGenre (name: String!, fictionId: ID!): Fiction! @cypher(
+    statement: """
+      MERGE (g:Genre {name: $name})
+      WITH g
+      MATCH (f:Fiction {id: $fictionId})
+      MERGE (f)-[:IS_GENRE]->(g)
+      RETURN f
+    """
+  )
+  RemoveGenre (name: String!): Int! @cypher(
+    statement: """
+      MATCH (g:Genre {name: $name})
+      WITH g, count(g) AS deleted
+      DETACH DELETE g
+      RETURN deleted
+    """
+  )
+}
+
+extend type Query {
+  GetFiction (id: ID!) : Fiction
+}

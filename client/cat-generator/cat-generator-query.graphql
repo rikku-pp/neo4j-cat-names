@@ -1,0 +1,6 @@
+
+query CatNameQuery ($countries: [String], $skipList: [String] ) {
+  CatNameV3 (countries: $countries, skipList: $skipList) {
+    name
+  }
+}

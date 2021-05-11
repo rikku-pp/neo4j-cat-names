@@ -1,0 +1,47 @@
+{
+  "name": "neo4j-cat-names",
+  "description": "You need to set up a database to run this sandbox!",
+  "keywords": [],
+  "dependencies": {
+    "@apollo/client": "3.3.13",
+    "apollo-server": "^2.19.1",
+    "graphql": "14.2.1",
+    "graphql-request": "^3.4.0",
+    "neo4j-driver": "4.2.1",
+    "neo4j-graphql-js": "2.19.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "vanilla-sharing": "6.1.0"
+  },
+  "license": "MIT",
+  "main": "./index.mjs",
+  "scripts": {
+    "start": "concurrently \"nodemon --ext graphql,mjs index.mjs localhost 4000\" \"webpack-dev-server --config client/webpack.config.js --mode=development\"",
+    "data-import": "node ./import/index.mjs",
+    "get-schema": "graphql get-schema",
+    "cron-jobs": "node ./cron-jobs.mjs",
+    "test": "jest --watchAll --verbose"
+  },
+  "resolutions": {
+    "graphql": "14.2.1"
+  },
+  "devDependencies": {
+    "@types/graphql": "14.0.1",
+    "nodemon": "1.18.4",
+    "jest": "24.9.0",
+    "webpack": "4",
+    "webpack-cli": "3",
+    "webpack-dev-server": "^3.11.2",
+    "@babel/core": "7.13.14",
+    "@babel/preset-env": "7.13.12",
+    "@babel/preset-react": "7.13.13",
+    "babel-loader": "8.2.2",
+    "concurrently": "6.0.0",
+    "node-cron": "3.0.0",
+    "html-webpack-plugin": "4.5.1",
+    "jsx-loader": "0.13.2",
+    "file-loader": "6.2.0",
+    "raw-loader": "4.0.2",
+    "csv-parse": "4.15.3"
+  }
+}

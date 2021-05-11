@@ -1,0 +1,8 @@
+mutation UpdateFictionGenre ($name: String!, $fictionId: ID!) {
+  UpdateFictionGenre (name: $name, fictionId: $fictionId) {
+    title
+    genre {
+      name
+    }
+  }
+}

@@ -1,0 +1,33 @@
+type CatName {
+  name: String!
+  transcribedName: String
+  country: [Country] @relation(name: "NAMED_IN", direction: OUT)
+  fiction: [Fiction] @relation(name: "APPEARS_IN", direction: OUT)
+}
+
+type Country {
+  name: String!
+  catNames: [CatName] @relation(name: "NAMED_IN", direction: IN)
+  catNameCount: Int
+}
+
+type Fiction {
+  id: ID!
+  title: String!
+  genre: [Genre] @relation(name: "IS_GENRE", direction: OUT)
+  media: Media
+}
+
+type Genre {
+  name: String!
+}
+
+enum Media {
+  Book
+  Comic
+  Movie
+  Tv
+  Meme
+  Mascot
+  Unknown
+}

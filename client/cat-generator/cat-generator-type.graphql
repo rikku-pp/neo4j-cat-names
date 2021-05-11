@@ -1,0 +1,25 @@
+type Query {
+  CatNameV1 (country: _CountryInput): CatName! @cypher(statement: """
+    MATCH (c:CatName)-[:NAMED_IN]->(co:Country {name: $country.name})
+    WITH collect(c.name)[toInteger(rand() * count(c) + 1)] AS randomCatName
+    MATCH (rc:CatName {name: randomCatName})
+    RETURN rc
+  """
+  )
+  CatNameV2 (country: _CountryInput, skipList: [String]): CatName @cypher(statement: """
+    MATCH (c:CatName)-[:NAMED_IN]->(co:Country {name: $country.name})
+    WHERE NOT c.name IN $skipList
+    WITH collect(c.name)[toInteger(rand() * count(c))] AS randomCatName
+    MATCH (rc:CatName {name: randomCatName})
+    RETURN rc
+  """
+  ) 
+  CatNameV3 (countries: [String], skipList: [String]): CatName @cypher(statement: """
+    MATCH (c:CatName)-[:NAMED_IN]->(co:Country)
+    WHERE co.name IN $countries AND NOT c.name IN $skipList
+    WITH collect(c.name)[toInteger(rand() * count(c))] AS randomCatName
+    MATCH (rc:CatName {name: randomCatName})
+    RETURN rc
+  """
+  ) 
+}

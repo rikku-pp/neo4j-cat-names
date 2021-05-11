@@ -1,0 +1,13 @@
+query CatNameDetailsQuery ($name: String ) {
+  CatNameDetails (name: $name) {
+    transcribedName
+    fiction {
+      id
+      title
+      media
+      genre {
+        name
+      }
+    }
+  }
+}
