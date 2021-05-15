@@ -1,7 +1,7 @@
 import React from 'react'
 
 import * as sharing from 'vanilla-sharing'
-import worldCat from './assets/world_cat.png'
+import blackCat from './assets/Black_Cat_Vector.svg'
 import { URL } from './utils'
 
 const url = URL
@@ -11,7 +11,7 @@ const description = 'What should you name your kitten?'
 const shareOptions = {
   reddit: { url, title },
   tumblr: { url, title, caption: description },
-  pinterest: { url, description, media: worldCat },
+  pinterest: { url, description, media: blackCat },
   line: { url, title },
   whatsapp: { url, title }
 }

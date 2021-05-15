@@ -1,9 +1,10 @@
 import { ApolloServer } from 'apollo-server'
 import { makeAugmentedSchema } from 'neo4j-graphql-js'
 import neo4j from 'neo4j-driver'
-
+import dotenv from 'dotenv'
 import { typeDefs } from './graphql-schema.mjs'
 import { resolvers } from './graphql-resolvers.mjs'
+dotenv.config()
 
 // Generate executable schema with auto-generated resolvers
 const schema = makeAugmentedSchema({

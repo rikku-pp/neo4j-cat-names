@@ -1,9 +1,28 @@
 {
   "name": "neo4j-cat-names",
   "description": "You need to set up a database to run this sandbox!",
-  "keywords": [],
+  "author": "https://github.com/rikku-pp",
+  "keywords": [
+    "neo4j",
+    "react",
+    "graphql",
+    "grandstack",
+    "apollo",
+    "mdl",
+    "cats"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn build && yarn serve",
+    "dev": "concurrently \"nodemon --ext graphql,mjs index.mjs localhost 4000\" \"webpack-dev-server --config webpack.dev.js --mode=development --host 0.0.0.0 --port 4001\"",
+    "build": "webpack --config webpack.prod.js --mode production",
+    "serve": "nodemon --ext graphql,mjs index.mjs localhost 4000",
+    "data-import": "node ./import/index.mjs",
+    "get-schema": "graphql get-schema",
+    "cron-jobs": "node ./cron-jobs.mjs"
+  },
   "dependencies": {
-    "@apollo/client": "3.3.13",
+    "@apollo/client": "^3.3.18",
     "apollo-server": "^2.19.1",
     "graphql": "14.2.1",
     "graphql-request": "^3.4.0",
@@ -12,14 +31,6 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "vanilla-sharing": "6.1.0"
-  },
-  "license": "MIT",
-  "main": "./index.mjs",
-  "scripts": {
-    "start": "concurrently \"nodemon --ext graphql,mjs index.mjs localhost 4000\" \"webpack-dev-server --config client/webpack.config.js --mode=development\"",
-    "data-import": "node ./import/index.mjs",
-    "get-schema": "graphql get-schema",
-    "cron-jobs": "node ./cron-jobs.mjs"
   },
   "resolutions": {
     "graphql": "14.2.1"
@@ -30,17 +41,19 @@
     "@babel/preset-react": "7.13.13",
     "@types/graphql": "14.0.1",
     "babel-loader": "8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "concurrently": "6.0.0",
     "csv-parse": "4.15.3",
     "dotenv": "^9.0.2",
     "file-loader": "6.2.0",
-    "html-webpack-plugin": "4.5.1",
+    "html-webpack-plugin": "^4.5.1",
     "jsx-loader": "0.13.2",
     "node-cron": "3.0.0",
     "nodemon": "1.18.4",
     "raw-loader": "4.0.2",
-    "webpack": "4",
-    "webpack-cli": "3",
-    "webpack-dev-server": "^3.11.2"
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
   }
 }
