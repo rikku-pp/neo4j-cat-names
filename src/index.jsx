@@ -11,8 +11,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 
-console.log('ENDPOINT ', ENDPOINT)
-
 function App() {
   return (
     <ApolloProvider client={client}>
