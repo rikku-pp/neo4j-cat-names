@@ -1,26 +1,27 @@
 import cron from 'node-cron'
 import { request } from 'graphql-request'
-import { dirname } from 'path';
+import dotenv from 'dotenv'
+dotenv.config()
 
-const datasetPath =  new URL(dirname(import.meta.url) + '/../dataset/').pathname;
 const hostname = /(?<=-)[\w]+$/.exec(process.env.HOSTNAME)
-const uri = `https://${hostname}-4000.sse.codesandbox.io/`
+const uri = process.env.IS_SANDBOX
+  ? `https://${hostname}-4000.sse.codesandbox.io/`
+  : 'http://localhost:4000'
 
 cron.schedule('*/1 * * * *', () => {
   washNeo4j()
-});
+})
 
-async function washNeo4j () {
-  const cleanFiction = /*GraphQL*/`
+async function washNeo4j() {
+  const cleanFiction = /*GraphQL*/ `
     mutation CleanFiction {
       CleanFiction
     }
   `
-  
-  const res = await request(uri, cleanFiction, {})
-    .then(result => result.CleanFiction)
-    .catch((e) => console.log('ERROR:', e ))
-  
-  console.log("Successfully cleaned ", res, " entries")
 
+  const res = await request(uri, cleanFiction, {})
+    .then((result) => result.CleanFiction)
+    .catch((e) => console.log('ERROR:', e))
+
+  console.log('Successfully cleaned ', res, ' entries')
 }

@@ -8,7 +8,7 @@ dotenv.config()
 
 const datasetPath = new URL(dirname(import.meta.url) + '/../dataset/').pathname
 
-let uri = process.env.API_URL
+let uri = process.env.IS_SANDBOX ? process.env.API_URL : 'http://localhost:4000'
 
 async function main() {
   const fileContent = fs.readFileSync(datasetPath + 'catnames.csv', 'utf8')
