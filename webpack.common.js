@@ -59,6 +59,7 @@ module.exports = {
       meta: {
         description: pkgJson.description
       },
+      gtag: process.env.GTAG,
       favicon: 'assets/favicon.ico'
     })
   ]

@@ -39,6 +39,16 @@
       rel="stylesheet"
       href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css"
     />
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=<%= htmlWebpackPlugin.options.gtag %>" 
+    ></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {  dataLayer.push(arguments); }
+        gtag("js", new Date());
+        gtag("config", "<%= htmlWebpackPlugin.options.gtag %>");
+    </script>
   </head>
 
   <body>
