@@ -11,15 +11,38 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 
+const injectGA = () => {
+  if (typeof window == 'undefined') {
+    return
+  }
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    window.dataLayer.push(arguments)
+  }
+  gtag('js', new Date())
+  gtag('config', process.env.GTAG)
+}
+
 function App() {
   return (
-    <ApolloProvider client={client}>
-      <CountryContextProvider>
-        <Layout>
-          <CatGenerator />
-        </Layout>
-      </CountryContextProvider>
-    </ApolloProvider>
+    <>
+      <ApolloProvider client={client}>
+        <CountryContextProvider>
+          <Layout>
+            <CatGenerator />
+          </Layout>
+        </CountryContextProvider>
+      </ApolloProvider>
+      {process.env.GTAG && (
+        <>
+          <script
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GTAG}`}
+          />
+          <script>{injectGA()}</script>
+        </>
+      )}
+    </>
   )
 }
 

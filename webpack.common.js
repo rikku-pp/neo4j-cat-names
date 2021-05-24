@@ -5,6 +5,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+var pkgJson = require('./package.json')
 require('dotenv').config()
 
 module.exports = {
@@ -55,6 +56,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html',
       title: 'Cat Names',
+      meta: {
+        description: pkgJson.description
+      },
       favicon: 'assets/favicon.ico'
     })
   ]

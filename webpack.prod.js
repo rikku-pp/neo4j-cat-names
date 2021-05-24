@@ -4,6 +4,7 @@
 
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
+const CopyPlugin = require('copy-webpack-plugin')
 const common = require('./webpack.common.js')
 
 module.exports = merge(common, {
@@ -14,7 +15,11 @@ module.exports = merge(common, {
       URL: process.env.URL,
       API_URL: process.env.API_URL,
       NODE_ENV: 'production',
-      DEBUG: false
+      DEBUG: false,
+      GTAG: process.env.GTAG
+    }),
+    new CopyPlugin({
+      patterns: [{ from: 'assets/robots.txt', to: 'robots.txt' }]
     })
   ],
   optimization: {

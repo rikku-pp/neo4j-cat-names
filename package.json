@@ -1,6 +1,6 @@
 {
   "name": "neo4j-cat-names",
-  "description": "You need to set up a database to run this sandbox!",
+  "description": "Pick a cat name at random",
   "author": "https://github.com/rikku-pp",
   "keywords": [
     "neo4j",
@@ -43,6 +43,7 @@
     "babel-loader": "8.2.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "concurrently": "6.0.0",
+    "copy-webpack-plugin": "6",
     "csv-parse": "4.15.3",
     "dotenv": "^9.0.2",
     "file-loader": "6.2.0",
